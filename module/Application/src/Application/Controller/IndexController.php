@@ -49,6 +49,13 @@ class IndexController extends AbstractActionController
 			$validator = new validation($this->getaddForm(), $this->getRequest());
 			$next = $validator->validator(['firstname', 'lastname']);
 
+			if (count($next) > 1) 
+			{
+				$this->getDbHelper();
+				$this->dbhelper->executeQuery("INSERT INTO users SET firstname = ?, lastname = ?", [$next['firstname'], $next['lastname']]);
+
+				return $this->redirect()->toRoute("home");
+			}
 			return $next;
 		}
 	}

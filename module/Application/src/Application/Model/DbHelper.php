@@ -36,8 +36,8 @@ class DbHelper
 		return $this->db->query("SELECT * FROM users", []);
 	}
 
-	public function executeQuery()
+	public function executeQuery($query, $data)
 	{
-
+		return $this->db->query($query, array_values($data) );
 	}
 }

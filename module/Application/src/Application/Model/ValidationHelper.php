@@ -27,7 +27,7 @@ class ValidationHelper
 			if ($this->form->isValid())
 			{
 				$data = $this->form->getData();
-
+				return $data;
 			} else
 			{
 				return ['form' => $this->form];
