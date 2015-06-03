@@ -9,13 +9,46 @@
 
 namespace Application\Controller;
 
+// Core of Zend
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Db\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Config\Config;
+
+// Custom classes
+
+use Application\Model\DbHelper as DbHelper;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        return new ViewModel();
-    }
+	private $dbhelper;
+
+	public function indexAction()
+	{
+		$dbhelper = $this->getDbHelper();	
+		return new ViewModel(array(
+			"all" =>	$dbhelper->getAll()
+		));
+	}
+
+	public function getDbHelper()
+	{
+		if (!$this->dbhelper) 
+		{
+			$this->dbhelper = new DbHelper($this->serviceLocator);
+		}
+		return $this->dbhelper;
+	}
+
+	/**
+	* Create and return Db\Adapter\Adapter instance
+	*
+	* @return Zend\Db\Adapter\Adapter instance
+	*/
+
+	public function getConfig()
+	{
+		return $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
+	}
 }

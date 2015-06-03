@@ -12,4 +12,19 @@
  */
 
 return array(
+	'service_manager' => array(
+		'factories' => array(
+			'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+		),
+		'aliases' => array(
+			'db' => 'Zend\Db\Adapter\Adapter',
+		),
+	),
+
+	'db' => array(
+		'driver'	=> 'Pdo',
+		'dsn' 		=> 'mysql:dbname=zend_crud;host=localhost',
+		'username' 	=> 'root',
+		'password' 	=> '',
+	)
 );
