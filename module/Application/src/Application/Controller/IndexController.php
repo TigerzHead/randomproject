@@ -26,9 +26,10 @@ class IndexController extends AbstractActionController
 
 	public function indexAction()
 	{
-		$dbhelper = $this->getDbHelper();	
+		$this->getDbHelper();
+
 		return new ViewModel(array(
-			"all" =>	$dbhelper->getAll()
+			"all" =>	$this->dbhelper->getAll()
 		));
 	}
 
