@@ -1,0 +1,22 @@
+<?php
+	$form = $this->form;
+	$form->setAttribute('action', $this->url(
+		'add',
+		array(
+			'action'		=> 'add',
+			'autocomplete'	=> 'off',
+			'process'		=> 'process',
+		)
+	));
+	$form->prepare();
+?>
+
+<?php echo $this->form()->openTag($form); ?>
+<label>Firstname</label>
+<?php echo $this->formInput($form->get('firstname')); ?>
+<?php echo $this->formElementErrors($form->get('firstname'), array('class'=>'error')); ?>
+<label>Lastname</label>
+<?php echo $this->formInput($form->get('lastname')); ?>
+<?php echo $this->formElementErrors($form->get('lastname'), array('class'=>'error')); ?>
+<?php echo $this->formRow($form->get('submit'));?>
+<?php echo $this->form()->closeTag();?>

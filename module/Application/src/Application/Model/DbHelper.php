@@ -11,6 +11,7 @@ class DbHelper
 	public function __construct($serviceLocator)
 	{
 		$this->serviceLocator = $serviceLocator;
+		$this->db = $this->getDb();
 	}
 
 	/**
@@ -24,16 +25,19 @@ class DbHelper
 		if (is_null($this->db))
 		{
 			$this->db = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
-			return $this->db;
 		}
+		
+		return $this->db;
 	}
 
 
 	public function getAll()
 	{
-		$db = $this->getDb();
-		$query = $db->query("SELECT * FROM users", []);
+		return $this->db->query("SELECT * FROM users", []);
+	}
 
-		return $query;
+	public function executeQuery()
+	{
+
 	}
 }

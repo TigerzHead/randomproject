@@ -9,7 +9,7 @@
 
 namespace Application\Controller;
 
-// Core of Zend
+// Zend core
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter;
@@ -17,20 +17,40 @@ use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
 
 // Custom classes
-
 use Application\Model\DbHelper as DbHelper;
+use Application\Model\ValidationHelper as validation;
+
+// Custom forms
+use Application\Form\addForm;
 
 class IndexController extends AbstractActionController
 {
 	private $dbhelper;
+	protected $form;
 
 	public function indexAction()
 	{
 		$this->getDbHelper();
 
-		return new ViewModel(array(
+		return new ViewModel([
 			"all" =>	$this->dbhelper->getAll()
-		));
+		]);
+	}
+
+	public function addAction()
+	{
+		if (!$this->getEvent()->getRouteMatch()->getParam('process')) 
+		{
+			return new ViewModel([
+				"form"	=> $this->getAddForm()
+			]);
+		} else 
+		{
+			$validator = new validation($this->getaddForm(), $this->getRequest());
+			$next = $validator->validator(['firstname', 'lastname']);
+
+			return $next;
+		}
 	}
 
 	public function getDbHelper()
@@ -43,13 +63,18 @@ class IndexController extends AbstractActionController
 	}
 
 	/**
-	* Create and return Db\Adapter\Adapter instance
+	* Retrieves the form.
 	*
-	* @return Zend\Db\Adapter\Adapter instance
+	* @return \addForm $form
 	*/
 
-	public function getConfig()
+	public function getAddForm()
 	{
-		return $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
+		if (!$this->form)
+		{
+			$form 		= new addForm();
+			$this->form = $form;
+		}
+		return $this->form;
 	}
 }
