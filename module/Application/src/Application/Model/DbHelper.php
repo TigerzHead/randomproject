@@ -4,7 +4,6 @@ namespace Application\Model;
 
 class DbHelper
 {
-
 	private $db;
 	protected $serviceLocator;
 
@@ -25,8 +24,7 @@ class DbHelper
 		if (is_null($this->db))
 		{
 			$this->db = $this->serviceLocator->get('Zend\Db\Adapter\Adapter');
-		}
-		
+		}		
 		return $this->db;
 	}
 
@@ -39,5 +37,10 @@ class DbHelper
 	public function executeQuery($query, $data)
 	{
 		return $this->db->query($query, array_values($data) );
+	}
+
+	public function DeleteRow()
+	{
+		return $this->db->query("DELETE FROM users WHERE $id = '?'", ['id'] );
 	}
 }

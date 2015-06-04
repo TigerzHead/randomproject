@@ -64,6 +64,11 @@ class IndexController extends AbstractActionController
 		}
 	}
 
+	public function deleteAction(){
+		$this->getDbHelper();
+		$this->dbhelper->executeQuery("DELETE FROM users WHERE uid = ?", ['uid']);		
+	}
+
 	public function getDbHelper()
 	{
 		if (!$this->dbhelper) 
@@ -97,7 +102,6 @@ class IndexController extends AbstractActionController
 		{
 			return;
 		}
-
 		$this->redirect()->toRoute('login');
 	}
 }

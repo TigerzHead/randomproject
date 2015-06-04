@@ -19,28 +19,24 @@ class ValidationHelper
 		if ($this->request->isPost()) 
 		{	
 			$this->form->setValidationGroup($group);
-
 			$this->form->setInputFilter($this->setInputFilter());
-
 			$this->form->setData($this->request->getPost());
 
-			if ($this->form->isValid())
-			{
+			if ($this->form->isValid()) {
 				$data = $this->form->getData();
 				return $data;
-			} else
-			{
+			} 
+			else {
 				return ['form' => $this->form];
 			}
 		}
 	}
-
+	
 	public function setInputFilter()
 	{
 		if (!$this->inputFilter)
 		{
 			$inputFilter = new \Zend\InputFilter\InputFilter();
-
 			$factory = new \Zend\InputFilter\Factory();
 
 			$inputFilter->add($factory->createInput(array(
