@@ -22,7 +22,7 @@
 		<label class="control-label" for="firstName">Firstname</label>
 		<div class="controls">
 			<?php echo $this->formInput($form->get('firstname')); ?>
-			<?php echo $this->formElementErrors($form->get('firstname'), array('class'=>'error')); ?>
+			<?php echo $this->formElementErrors($form->get('firstname'), array('class'=>'alert alert-danger')); ?>
 		</div>
 	</div>
 
@@ -31,7 +31,7 @@
 		<label class="control-label" for="lastName">Lastname</label>
 		<div class="controls">
 			<?php echo $this->formInput($form->get('lastname')); ?>
-			<?php echo $this->formElementErrors($form->get('lastname'), array('class'=>'error')); ?>
+			<?php echo $this->formElementErrors($form->get('lastname'), array('class'=>'alert alert-danger')); ?>
 		</div>
 	</div>
 
