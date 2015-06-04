@@ -4,7 +4,7 @@ namespace Application\Form;
 use Zend\Form\Form;
 use Zend\Form\Element;
 
-class addForm extends Form
+class loginForm extends Form
 {
 	public function __construct($name = null)
 	{
@@ -46,7 +46,7 @@ class addForm extends Form
 			'attributes' => array(
 				'type'  => 'submit',
 				'value' => _('Submit'),
-				'class'	=> 'btn btn-primary'				
+				'class'	=> 'btn btn-primary'
 			),
 		));
 	}

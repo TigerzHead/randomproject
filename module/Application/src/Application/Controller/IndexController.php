@@ -15,6 +15,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
+use Zend\Session\Container;
 
 // Custom classes
 use Application\Model\DbHelper as DbHelper;
@@ -30,10 +31,13 @@ class IndexController extends AbstractActionController
 
 	public function indexAction()
 	{
+
+		$this->checkLogin();
+
 		$this->getDbHelper();
 
 		return new ViewModel([
-			"all" =>	$this->dbhelper->getAll()
+			"all" =>	$this->dbhelper->getAll(),
 		]);
 	}
 
@@ -83,5 +87,17 @@ class IndexController extends AbstractActionController
 			$this->form = $form;
 		}
 		return $this->form;
+	}
+
+	public function checkLogin()
+	{
+		$sess = new Container('login');
+
+		if ($sess->check) 
+		{
+			return;
+		}
+
+		$this->redirect()->toRoute('login');
 	}
 }

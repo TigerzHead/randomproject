@@ -1,9 +1,9 @@
 <?php
 	$form = $this->form;
 	$form->setAttribute('action', $this->url(
-		'add',
+		'login',
 		array(
-			'action'		=> 'add',
+			'action'		=> 'index',
 			'autocomplete'	=> 'off',
 			'process'		=> 'process',
 		)
@@ -11,18 +11,18 @@
 	$form->prepare();
 ?>
 
+
 <?php echo $this->form()->openTag($form); ?>
 
 	<!-- Form Name -->
-	<legend>Add user</legend>
+	<legend>Login</legend>
 
 	<!-- Text input-->
 	<div class="control-group">
 		<label class="control-label" for="firstName">Firstname</label>
 		<div class="controls">
 			<?php echo $this->formInput($form->get('firstname')); ?>
-
-			<?php echo $this->formElementErrors($form->get('firstname'), array('class'=>'alert alert-danger')); ?>
+			<?php echo $this->formElementErrors($form->get('firstname'), array('class'=>'error')); ?>
 		</div>
 	</div>
 
@@ -31,7 +31,7 @@
 		<label class="control-label" for="lastName">Lastname</label>
 		<div class="controls">
 			<?php echo $this->formInput($form->get('lastname')); ?>
-			<?php echo $this->formElementErrors($form->get('lastname'), array('class'=>'alert alert-danger')); ?>
+			<?php echo $this->formElementErrors($form->get('lastname'), array('class'=>'error')); ?>
 		</div>
 	</div>
 
@@ -44,3 +44,8 @@
 	</div>
 
 <?php echo $this->form()->closeTag();?>
+
+
+
+
+

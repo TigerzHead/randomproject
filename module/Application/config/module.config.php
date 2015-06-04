@@ -30,6 +30,16 @@ return array(
 					),
 				),
 			),
+			'login' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/login[/:process]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Login',
+						'action'		=> 'Index',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(
@@ -53,7 +63,8 @@ return array(
 	),
 	'controllers' => array(
 		'invokables' => array(
-			'Application\Controller\Index' => 'Application\Controller\IndexController'
+			'Application\Controller\Index'	=>	'Application\Controller\IndexController',
+			'Application\Controller\Login'	=>	'Application\Controller\LoginController'
 		),
 	),
 	'view_manager' => array(
@@ -64,6 +75,7 @@ return array(
 		'exception_template'       => 'error/index',
 		'template_map' => array(
 			'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+			'login/layout'            => __DIR__ . '/../view/application/login/layout.phtml',
 			'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
 			'error/404'               => __DIR__ . '/../view/error/404.phtml',
 			'error/index'             => __DIR__ . '/../view/error/index.phtml',
