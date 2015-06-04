@@ -40,6 +40,16 @@ return array(
 					),
 				),
 			),
+			'logout' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/logout',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Login',
+						'action'		=> 'Logout',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(

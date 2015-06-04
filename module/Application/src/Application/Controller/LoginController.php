@@ -15,7 +15,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Db\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
-
+use Zend\Session\Container;
 
 // Custom forms
 use Application\Form\loginForm;
@@ -63,6 +63,18 @@ class LoginController extends AbstractActionController
 			}
 			return $next;
 		}
+	}
+
+	public function logoutAction()
+	{
+		$sess = new Container('login');
+
+		if ($sess->check) 
+		{
+			$sess->getManager()->getStorage()->clear('login');
+		}
+
+		$this->redirect()->toRoute('login');
 	}
 
 	/**
