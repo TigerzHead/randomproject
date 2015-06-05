@@ -50,6 +50,16 @@ return array(
 					),
 				),
 			),
+			'chat' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/chat',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Chat',
+						'action'		=> 'Index',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(
@@ -74,7 +84,8 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
 			'Application\Controller\Index'	=>	'Application\Controller\IndexController',
-			'Application\Controller\Login'	=>	'Application\Controller\LoginController'
+			'Application\Controller\Login'	=>	'Application\Controller\LoginController',
+			'Application\Controller\Chat'	=>	'Application\Controller\ChatController'
 		),
 	),
 	'view_manager' => array(
