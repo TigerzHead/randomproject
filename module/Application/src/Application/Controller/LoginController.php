@@ -54,7 +54,7 @@ class LoginController extends AbstractActionController
 			{
 
 				$this->getDbHelper();
-				$loginCheck = $this->dbhelper->executeQuery("SELECT * FROM users WHERE firstname = ? AND lastname = ?", [$next['firstname'], $next['lastname']]);
+				$loginCheck = $this->dbhelper->executeQuery("SELECT DISTINCT * FROM users WHERE firstname = ? AND lastname = ? ", [$next['firstname'], $next['lastname']]);
 
 				$checker = $this->getLoginHelper($loginCheck);
 				$path = $checker->login($this->getLoginForm(), $this->redirect());

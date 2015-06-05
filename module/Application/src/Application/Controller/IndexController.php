@@ -64,7 +64,9 @@ class IndexController extends AbstractActionController
 		}
 	}
 
-	public function deleteAction(){
+	public function deleteAction()
+	{
+
 		$this->getDbHelper();
 		$this->dbhelper->executeQuery("DELETE FROM users WHERE uid = ?", ['uid']);		
 	}

@@ -34,13 +34,13 @@ class DbHelper
 		return $this->db->query("SELECT * FROM users", []);
 	}
 
+	public function getChat()
+	{
+		return $this->db->query("SELECT * FROM chat INNER JOIN users ON chat.uid = users.uid ORDER BY chat.date ASC", []);
+	}
+
 	public function executeQuery($query, $data)
 	{
 		return $this->db->query($query, array_values($data) );
-	}
-
-	public function DeleteRow()
-	{
-		return $this->db->query("DELETE FROM users WHERE $id = '?'", ['id'] );
 	}
 }

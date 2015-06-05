@@ -22,11 +22,12 @@ class ValidationHelper
 			$this->form->setInputFilter($this->setInputFilter());
 			$this->form->setData($this->request->getPost());
 
-			if ($this->form->isValid()) {
+			if ($this->form->isValid()) 
+			{
 				$data = $this->form->getData();
 				return $data;
-			} 
-			else {
+			} else 
+			{
 				return ['form' => $this->form];
 			}
 		}

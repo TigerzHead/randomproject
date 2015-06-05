@@ -60,6 +60,29 @@ return array(
 					),
 				),
 			),
+			'post' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/chat/post[/:uid]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Chat',
+						'action'		=> 'Post',
+					),
+					'constraints' => array(
+						'uid'		=> '[0-9]+',
+					),
+				),
+			),
+			'refresh' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/chat/refresh',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Chat',
+						'action'		=> 'Chat',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(

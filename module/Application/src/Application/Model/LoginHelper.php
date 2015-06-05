@@ -20,7 +20,10 @@ class LoginHelper
 		{
 			$sess = new Container('login');
 			$sess->check = true;
-		
+			
+			foreach ($this->query as $account) {
+				$sess->user = $account->uid;
+			}
 			return $redirect->toRoute('home');
 		}
 		

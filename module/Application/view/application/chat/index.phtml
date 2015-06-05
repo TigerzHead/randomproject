@@ -1,0 +1,19 @@
+<div class="container col-sm-4" id="postContainer" style="height:400px; overflow:auto;">
+
+</div>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<div class="input-group">
+	<?php echo $this->formInput($form->get('textfield')); ?>
+	<?php echo $this->formElementErrors($form->get('textfield'), array('class'=>'alert alert-danger')); ?>
+	<span class="input-group-addon">
+		<?php echo $this->formRow($form->get('submit'));?>
+	</span>
+</div>
+
+<?php echo $this->form()->closeTag();?>
+
+<script>
+	var id = <?php echo $user; ?>
+</script
