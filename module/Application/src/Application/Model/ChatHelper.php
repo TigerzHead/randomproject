@@ -32,6 +32,7 @@ class ChatHelper
 				echo "</div>";
 			}
 		}
+		echo "<div id='bottom'></div>";
 	}
 }
 ?>

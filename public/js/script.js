@@ -29,6 +29,17 @@ $(document).ready(function()
 		}
 	})
 
+	$('#search').on('click', function(e)
+	{
+		e.preventDefault();
+
+		if ($('#srch-term').val() !== '') 
+		{
+			//submitPost($('#textField').val());
+			console.log('hallo');
+		}
+	})
+
 	setInterval(function() {
 		refresh();
 	}, 2000);

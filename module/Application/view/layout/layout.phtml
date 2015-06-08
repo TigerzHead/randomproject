@@ -44,6 +44,12 @@
 						<li id="chat"><a href="<?php echo $this->url('chat') ?>"><?php echo $this->translate('Chat') ?></a></li>
 						<li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
 					</ul>
+					<div class="input-group col-sm-2">
+						<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+							<div class="input-group-btn">
+								<button class="btn btn-default" id="search"><i class="glyphicon glyphicon-search"></i></button>
+						</div>
+					</div>
 				</div><!--/.nav-collapse -->
 			</div>
 		</nav>
