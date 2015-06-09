@@ -13,13 +13,17 @@
 		<!-- Le styles -->
 		<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
 						->prependStylesheet($this->basePath('css/style.css'))
-						->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-						->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+						->prependStylesheet($this->basePath('css/materialize.min.css'))
+						->prependStylesheet($this->basePath('font/material-design-icons'))
+						->prependStylesheet($this->basePath('font/roboto'))
+						//->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+						//->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
 
 		<!-- Scripts -->
 		<?php echo $this->headScript()
 			->prependFile($this->basePath('js/bootstrap.min.js'))
 			->prependFile($this->basePath('js/script.js'))
+			->prependFile($this->basePath('js/materialize.min.js'))
 			->prependFile($this->basePath('js/jquery.min.js'))
 			->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
 			->prependFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
@@ -27,37 +31,33 @@
 
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav">
-						<li id="home"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-						<li id="add"><a href="<?php echo $this->url('add') ?>"><?php echo $this->translate('Add') ?></a></li>
-						<li id="edit"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Edit') ?></a></li>
-						<li id="chat"><a href="<?php echo $this->url('chat') ?>"><?php echo $this->translate('Chat') ?></a></li>
-						<li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
-					</ul>
-					<div class="input-group col-sm-2">
-						<input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-							<div class="input-group-btn">
-								<button class="btn btn-default" id="search"><i class="glyphicon glyphicon-search"></i></button>
+		<nav class="red lighten-1">
+			<div class="nav-wrapper">
+				<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
+				<a href="#" data-activates="mobile-nav" class="right button-collapse"><i class="mdi-navigation-more-vert"></i></a>
+				<ul class="right hide-on-med-and-down">
+					<li id="home"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+					<li id="add"><a href="<?php echo $this->url('add') ?>"><?php echo $this->translate('Add') ?></a></li>
+					<li id="edit"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Edit') ?></a></li>
+					<li id="chat"><a href="<?php echo $this->url('chat') ?>"><?php echo $this->translate('Chat') ?></a></li>
+					<li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+				</ul>
+				<div class="right">
+					<form id="searchForm">
+						<div class="input-field">
+							<input type="search" id="search-field" class="field" required maxlength="" autocomplete="off">
+							<label for="search-field"><i class="mdi-action-search"></i></label>
+							<i class="mdi-navigation-close close"></i>
 						</div>
-					</div>
-				</div><!--/.nav-collapse -->
+					</form>
+				</div>
 			</div>
 		</nav>
 		<div class="container">
 			<?php echo $this->content; ?>
 			<hr>
 			<footer>
-			   
+				
 			</footer>
 		</div> <!-- /container -->
 		<?php echo $this->inlineScript() ?>

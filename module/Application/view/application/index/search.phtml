@@ -1,0 +1,23 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>User ID</th>
+			<th>Firstname</th>
+			<th>Lastname</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php 	
+	foreach ($results as $single) 
+	{	
+		echo "<tr>";	
+			echo "<td>" . $single->uid . "</td>";
+			echo "<td>" . $single->firstname . "</td>";
+			echo "<td>" . $single->lastname . "</td>";
+			echo '<td><a class="btn" href="delete.php?id='. $single->uid .'">X</a></td>';
+ 		echo "</tr>";
+	}
+	?>
+	</tbody>
+</table>

@@ -22,13 +22,13 @@ class ChatHelper
 		{
 			if ($post->uid == $this->user) 
 			{
-				echo "<div class='col-sm-12' style=' background-color:lightblue;'>";
-				echo "<p style='float:right;'>" . $post->firstname . " " . $post->lastname . " : " . $post->post . "</p>";
+				echo "<div class='col s7' style=' background-color:lightblue;float:right;'>";
+				echo "<p >" . $post->firstname . " " . $post->lastname . " : " . $post->post . "</p>";
 				echo "</div>";			
 			} else 
 			{
-				echo "<div class='col-sm-12'>";
-				echo "<p style='float:left;'>" . $post->firstname . " " . $post->lastname . " : " . $post->post . "</p>";
+				echo "<div class='col s7'>";
+				echo "<p>" . $post->firstname . " " . $post->lastname . " : " . $post->post . "</p>";
 				echo "</div>";
 			}
 		}

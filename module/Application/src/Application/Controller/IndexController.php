@@ -16,10 +16,12 @@ use Zend\Db\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
 use Zend\Session\Container;
+use Zend\Http\Request;
 
 // Custom classes
 use Application\Model\DbHelper as DbHelper;
 use Application\Model\ValidationHelper as validation;
+use Application\Model\SearchHelper as Search;
 
 // Custom forms
 use Application\Form\addForm;
@@ -27,6 +29,7 @@ use Application\Form\addForm;
 class IndexController extends AbstractActionController
 {
 	private $dbhelper;
+	private $searchhelper;
 	protected $form;
 
 	public function indexAction()
@@ -71,6 +74,22 @@ class IndexController extends AbstractActionController
 		$this->dbhelper->executeQuery("DELETE FROM users WHERE uid = ?", ['uid']);		
 	}
 
+	public function searchAction()
+	{
+		$sess = new Container('search');
+
+		return new ViewModel(array(
+			"results"	=> $this->getResults(),
+		));
+	}
+
+	public function setSearchAction()
+	{
+		$sess = new Container('search');
+		$sess->search = key($_GET);
+		exit;
+	}
+
 	public function getDbHelper()
 	{
 		if (!$this->dbhelper) 
@@ -78,6 +97,15 @@ class IndexController extends AbstractActionController
 			$this->dbhelper = new DbHelper($this->serviceLocator);
 		}
 		return $this->dbhelper;
+	}
+
+	public function getSearchHelper($q, $db)
+	{
+		if (!$this->searchhelper) 
+		{
+			$this->searchhelper = new Search($q, $db);
+		}
+		return $this->searchhelper;
 	}
 
 	/**
@@ -105,5 +133,14 @@ class IndexController extends AbstractActionController
 			return;
 		}
 		$this->redirect()->toRoute('login');
+	}
+
+	public function getResults()
+	{
+		$sess = new Container('search');
+		$this->getDbHelper();
+		$this->getSearchHelper($sess->search, $this->dbhelper);
+
+		return $this->searchhelper->search();
 	}
 }

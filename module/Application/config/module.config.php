@@ -83,6 +83,29 @@ return array(
 					),
 				),
 			),
+			'search' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/search',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Index',
+						'action'		=> 'Search',
+					),
+				),
+			),
+			'setSearch' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/setSearch[/:data]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Index',
+						'action'		=> 'setSearch',
+					),
+					'constraints' => array(
+						'data'		=> '[a-zA-Z0-9]+',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(

@@ -29,20 +29,21 @@ $(document).ready(function()
 		}
 	})
 
-	$('#search').on('click', function(e)
+	$('#searchForm').submit(function(e)
 	{
+		var val = $('#search-field').val();
 		e.preventDefault();
 
-		if ($('#srch-term').val() !== '') 
+		if (val !== '') 
 		{
-			//submitPost($('#textField').val());
-			console.log('hallo');
-		}
+			search(val);
+		};
 	})
 
 	setInterval(function() {
 		refresh();
 	}, 2000);
+
 })
 
 function submitPost(post)
@@ -70,7 +71,25 @@ function refresh()
 
 		success: function(data)
 		{
-			$("#postContainer").html(data);
+			$("#postContainer > .row").html(data);
+			
+	$("#postContainer").animate({
+		scrollTop: $('#postContainer')[0].scrollHeight
+	}, 3000);
+		}
+	});
+}
+
+function search(data)
+{
+	$.ajax(
+	{
+		type: "GET",
+		url: "/setSearch?" + data,
+
+		success: function(data)
+		{
+			window.location.replace("search");
 		}
 	});
 }
