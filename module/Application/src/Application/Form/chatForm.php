@@ -11,7 +11,7 @@ class chatForm extends Form
 		// we want to ignore the name passed
 		parent::__construct('Application');
 		$this->setAttribute('method', 'post');
-		$this->setAttribute('class', 'form-horizontal col-sm-offset-4 col-sm-4');
+		$this->setAttribute('class', 'col s6');
 
 		$this->add(array(
 			'name' => 'textfield',
@@ -19,7 +19,6 @@ class chatForm extends Form
 				'type'  => 'text',
 				'maxlength' => 255,
 				'size'		=> 30,
-				'class'		=> 'form-control',
 				'id'		=> 'textField'
 			),
 			'options'	=> array(

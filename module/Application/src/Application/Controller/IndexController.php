@@ -59,6 +59,8 @@ class IndexController extends AbstractActionController
 			if (count($next) > 1) 
 			{
 				$this->getDbHelper();
+				$this->dbhelper->checkDup($next['firstname'], $next['lastname']);
+				
 				$this->dbhelper->executeQuery("INSERT INTO users SET firstname = ?, lastname = ?", [$next['firstname'], $next['lastname']]);
 
 				return $this->redirect()->toRoute("home");

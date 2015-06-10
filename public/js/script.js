@@ -40,10 +40,17 @@ $(document).ready(function()
 		};
 	})
 
-	setInterval(function() {
-		refresh();
-	}, 2000);
+	refresh();
 
+	// if ($("#bottom")) 
+	// {
+
+	//};
+	// console.log($(this).height());
+	setInterval(function() {
+		//refresh();
+//Materialize.toast("HALLO", 4000);
+	}, 5000);
 })
 
 function submitPost(post)

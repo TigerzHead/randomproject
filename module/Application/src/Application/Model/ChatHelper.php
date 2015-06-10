@@ -20,15 +20,16 @@ class ChatHelper
 	{
 		foreach ($this->chat as $post) 
 		{
+			$date = explode(' ', $post->date);
 			if ($post->uid == $this->user) 
 			{
 				echo "<div class='col s7' style=' background-color:lightblue;float:right;'>";
-				echo "<p >" . $post->firstname . " " . $post->lastname . " : " . $post->post . "</p>";
+				echo "<p class='chat'>" . $post->firstname . " " . $post->lastname . " : <br>" . htmlspecialchars($post->post) . "<p class='chat chatBox'>" . $date[1] . "</p></p>";
 				echo "</div>";			
 			} else 
 			{
 				echo "<div class='col s7'>";
-				echo "<p>" . $post->firstname . " " . $post->lastname . " : " . $post->post . "</p>";
+				echo "<p class='chat'>" . $post->firstname . " " . $post->lastname . " : <br>" . $post->post . "<p class='chat chatBox'>" . $date[1] . "</p></p>";
 				echo "</div>";
 			}
 		}

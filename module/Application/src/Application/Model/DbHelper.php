@@ -6,11 +6,13 @@ class DbHelper
 {
 	private $db;
 	protected $serviceLocator;
+	protected $checked;
 
 	public function __construct($serviceLocator)
 	{
 		$this->serviceLocator = $serviceLocator;
 		$this->db = $this->getDb();
+		$this->checked = true;
 	}
 
 	/**
@@ -41,6 +43,21 @@ class DbHelper
 
 	public function executeQuery($query, $data)
 	{
-		return $this->db->query($query, array_values($data) );
+		if ($this->checked) 
+		{
+			return $this->db->query($query, array_values($data) );
+		}
+		
+	}
+
+	public function checkDup($first, $last)
+	{
+		$checker = $this->db->query("SELECT * FROM users WHERE firstname = ? AND lastname = ? ", [$first, $last]);
+
+		if ($checker->count() >= 1) 
+		{
+			$this->checked = false;
+		}
+		return;
 	}
 }

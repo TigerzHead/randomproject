@@ -11,7 +11,7 @@ class loginForm extends Form
 		// we want to ignore the name passed
 		parent::__construct('Application');
 		$this->setAttribute('method', 'post');
-		$this->setAttribute('class', 'form-horizontal col-sm-offset-4 col-sm-4');
+		$this->setAttribute('class', 'col s6 offset-s4');
 
 		$this->add(array(
 			'name' => 'firstname',
@@ -19,6 +19,7 @@ class loginForm extends Form
 				'type'  => 'text',
 				'maxlength' => 30,
 				'size'		=> 20,
+				'class'		=> 'col s6'
 			),
 			'options'	=> array(
 				'label_options' => array(
@@ -33,6 +34,7 @@ class loginForm extends Form
 				'type'  => 'text',
 				'maxlength' => 30,
 				'size'		=> 20,
+				'class'		=> 'col s6'
 			),
 			'options'	=> array(
 				'label_options' => array(
