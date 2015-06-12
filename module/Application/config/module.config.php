@@ -106,6 +106,16 @@ return array(
 					),
 				),
 			),
+			'pictures' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/pictures',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Picture',
+						'action'		=> 'Index',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(
@@ -131,7 +141,8 @@ return array(
 		'invokables' => array(
 			'Application\Controller\Index'	=>	'Application\Controller\IndexController',
 			'Application\Controller\Login'	=>	'Application\Controller\LoginController',
-			'Application\Controller\Chat'	=>	'Application\Controller\ChatController'
+			'Application\Controller\Chat'	=>	'Application\Controller\ChatController',
+			'Application\Controller\Picture'	=>	'Application\Controller\PictureController',
 		),
 	),
 	'view_manager' => array(

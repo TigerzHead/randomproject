@@ -42,13 +42,14 @@ $(document).ready(function()
 
 	refresh();
 
-	// if ($("#bottom")) 
-	// {
+	$("#postContainer").animate({
+		scrollTop: $('#postContainer')[0].scrollHeight
+	}, 3000);
 
-	//};
-	// console.log($(this).height());
+
+
 	setInterval(function() {
-		//refresh();
+		refresh();
 //Materialize.toast("HALLO", 4000);
 	}, 5000);
 })
@@ -79,10 +80,6 @@ function refresh()
 		success: function(data)
 		{
 			$("#postContainer > .row").html(data);
-			
-	$("#postContainer").animate({
-		scrollTop: $('#postContainer')[0].scrollHeight
-	}, 3000);
 		}
 	});
 }
