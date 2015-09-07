@@ -16,20 +16,59 @@ use Zend\Db\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Config\Config;
 use Zend\Session\Container;
+use Zend\Http\PhpEnvironment\Request;
 
 // Custom classes
 use Application\Model\DbHelper as DbHelper;
+use Application\Model\ValidationHelper as validation;
 
+// Custom forms
+use Application\Form\pictureForm;
 
 class PictureController extends AbstractActionController
 {
 	private $dbhelper;
+	private $form;
 
 	public function indexAction()
 	{
 		$this->getDbHelper();
 
-		return new ViewModel();
+		return new ViewModel(array(
+			'pictures' => $this->dbhelper->getPictures()
+		));
+	}
+
+	public function addAction()
+	{
+		if (!$this->getEvent()->getRouteMatch()->getParam('process')) 
+		{
+			return new ViewModel([
+				"form"	=> $this->getPictureForm()
+			]);
+		} else 
+		{
+			$validator = new validation($this->getPictureForm(), $this->getRequest());
+			$next = $validator->validator(['title', 'description', 'image']);
+
+
+			if (count($next) > 1) 
+			{
+
+				$this->getDbHelper();
+				//$this->dbhelper->checkDup($next['title'], $next['description'], $next[]);
+				$request = new Request();
+				$files = $request->getFiles();
+				$filter = new \Zend\Filter\File\RenameUpload("public/img");
+				$filter->setUseUploadName(true);
+				$filter->filter($files['image']);
+
+				$this->dbhelper->executeQuery("INSERT INTO pictures SET uid = 8, title = ?, description = ?, image = ?", [$next['title'], $next['description'], $files['image']['name']]);
+
+				return $this->redirect()->toRoute("home");
+			}
+			return $next;
+		}
 	}
 
 	public function getDbHelper()
@@ -41,4 +80,19 @@ class PictureController extends AbstractActionController
 		return $this->dbhelper;
 	}
 
+	/**
+	* Retrieves the form.
+	*
+	* @return \addForm $form
+	*/
+
+	public function getPictureForm()
+	{
+		if (!$this->form)
+		{
+			$form = new pictureForm();
+			$this->form = $form;
+		}
+		return $this->form;
+	}
 }

@@ -145,4 +145,12 @@ class IndexController extends AbstractActionController
 
 		return $this->searchhelper->search();
 	}
+
+	public function deleteIdAction()
+	{
+		$uid = $this->getEvent()->getRouteMatch()->getParam('uid');
+		$this->getDbHelper();
+		$this->dbhelper->delete($uid);
+		exit;
+	}
 }

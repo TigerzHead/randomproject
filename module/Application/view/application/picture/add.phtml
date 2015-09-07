@@ -1,0 +1,37 @@
+<?php
+	$form = $this->form;
+	$form->setAttribute('action', $this->url(
+		'addPictures',
+		array(
+			'action'		=> 'picture',
+			'autocomplete'	=> 'off',
+			'process'		=> 'process',
+		)
+	));
+	$form->prepare();
+?>
+<div class="row">
+	<?php echo $this->form()->openTag($form); ?>
+		<div class="row">
+			<div class="input-field col s12">
+				<?php echo $this->formInput($form->get('title')); ?>
+				<label for="first_name">Title</label>
+			<?php echo $this->formElementErrors($form->get('title'), array('class'=>'card-panel red lighten-2 white-text col s5')); ?>
+			</div>
+				
+			<div class="input-field col s12">
+				<?php echo $this->formInput($form->get('description')); ?>
+				<label for="last_name">Description</label>
+				<?php echo $this->formElementErrors($form->get('description'), array('class'=>'card-panel red lighten-2 white-text col s5')); ?>
+			</div>
+			<div class="input-field col s12">
+				<?php echo $this->formInput($form->get('image')); ?>
+				<label for="last_name">Image</label>
+				<?php echo $this->formElementErrors($form->get('image'), array('class'=>'card-panel red lighten-2 white-text col s5')); ?>
+			</div>
+		</div>
+		<button class="btn waves-effect waves-light" type="submit" name="action">Submit
+			<i class="mdi-content-send right"></i>
+		</button>
+	<?php echo $this->form()->closeTag();?>
+</div>

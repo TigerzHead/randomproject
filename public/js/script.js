@@ -97,3 +97,17 @@ function search(data)
 		}
 	});
 }
+
+function deleteFunction(uid)
+{
+	$.ajax(
+	{
+		type: "GET",
+		url: "/deleteId/" + uid,
+
+		success: function()
+		{
+			location.reload();
+		}
+	});
+}

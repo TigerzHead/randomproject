@@ -106,6 +106,19 @@ return array(
 					),
 				),
 			),
+			'deleteId' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/deleteId[/:uid]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Index',
+						'action'		=> 'deleteId',
+					),
+					'constraints' => array(
+						'uid'		=> '[0-9]+',
+					),
+				),
+			),
 			'pictures' => array(
 				'type' => 'segment',
 				'options' => array(
@@ -113,6 +126,16 @@ return array(
 					'defaults' 	=> array(
 						'controller'	=> 'Application\Controller\Picture',
 						'action'		=> 'Index',
+					),
+				),
+			),
+			'addPictures' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/addPictures[/:process]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Picture',
+						'action'		=> 'Add',
 					),
 				),
 			),

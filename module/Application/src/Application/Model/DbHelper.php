@@ -41,6 +41,11 @@ class DbHelper
 		return $this->db->query("SELECT * FROM chat INNER JOIN users ON chat.uid = users.uid ORDER BY chat.date ASC", []);
 	}
 
+	public function getPictures()
+	{
+		return $this->db->query("SELECT * FROM pictures INNER JOIN users ON pictures.uid = users.uid", []);
+	}
+
 	public function executeQuery($query, $data)
 	{
 		if ($this->checked) 
@@ -59,5 +64,10 @@ class DbHelper
 			$this->checked = false;
 		}
 		return;
+	}
+
+	public function delete($value) 
+	{
+		$this->db->query("DELETE FROM users WHERE uid = ?", [$value]);
 	}
 }

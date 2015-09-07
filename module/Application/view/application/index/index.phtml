@@ -15,7 +15,7 @@
 			echo "<td>" . $single->uid . "</td>";
 			echo "<td>" . $single->firstname . "</td>";
 			echo "<td>" . $single->lastname . "</td>";
-			echo '<td><a class="btn" href="delete.php?id='. $single->uid .'">X</a></td>';
+			echo '<td><a class="btn" onclick="deleteFunction('. $single->uid .');">X</a></td>';
  		echo "</tr>";
 	}
 	?>
