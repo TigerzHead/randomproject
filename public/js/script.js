@@ -1,5 +1,14 @@
+var champData;
+var img;
+var sumImg;
+var summonerData;
+
 $(document).ready(function() 
 {
+	summonerData();
+	championData();
+
+	$('.materialboxed').materialbox();
 
 	$(".alert.alert-danger")
 	.css({
@@ -9,7 +18,10 @@ $(document).ready(function()
 	});
 
 	var loc = window.location.pathname;
-	loc =  loc.split('/')
+	loc =  loc.split('/');
+
+	var count;
+	var check;
 
 	if (!loc[1]) 
 	{
@@ -42,16 +54,20 @@ $(document).ready(function()
 
 	refresh();
 
-	$("#postContainer").animate({
-		scrollTop: $('#postContainer')[0].scrollHeight
-	}, 3000);
+	// $("#postContainer").animate({
+	// 	scrollTop: $('#postContainer')[0].scrollHeight
+	// }, 3000);
 
+	var url = window.location.href;
+	url = url.split('#');
 
-
-	setInterval(function() {
-		refresh();
-//Materialize.toast("HALLO", 4000);
-	}, 5000);
+	paginationBtn(url[1]);
+	if (typeof pics !== 'undefined') 
+	{
+		loadImages(pics);
+	};
+	
+	calendar();
 })
 
 function submitPost(post)
@@ -111,3 +127,236 @@ function deleteFunction(uid)
 		}
 	});
 }
+
+function paginationBtn(url)
+{
+
+	$(".card").hide();
+	url = url !== undefined ? url : 1;
+	$('.pag.active').removeClass('active');
+	$('#pag_' + url).addClass('active');
+
+	showImages(url);
+}
+
+function loadImages(data)
+{
+	var lng = 1;
+	$.each(data, function(index, pic){
+		$("#card_" + lng + " > .card > .card-image").append("<img class='materialboxed s12 m12 l12' src='img/" + pic.image + "' height='300px'>");
+		$("#card_" + lng + " > .card > .card-image").append("<span class='card-title'>" + pic.title + "</span>");
+		$("#card_" + lng + " > .card > .card-content").html("<p>" + pic.desc + "</p>");
+		lng++;
+	});
+}
+
+function showImages(url)
+{
+	if (url == 1) 
+	{
+		count = 1;
+	} else 
+	{
+		count = (url * 4) - 3;
+	}
+
+	check = count + 3;
+	
+	for (var i = count; i <= check; i++) 
+	{
+		$("#card_" + i + " > .card").show();
+	};
+}
+
+function calendar()
+{
+	var d = new Date();
+	var count = 1;
+
+	var days = getDays(d.getMonth());
+
+	for (var i = 1; i < 7; i++)
+	{
+		$("#calendar").append("<tr id='nmb_" + i + "'></tr>");
+
+		for (var r = 1; r <= 7; r++) {
+
+			$("#nmb_" + i).append("<td>" + count + "</td>");
+
+			if (count == days) 
+			{
+				count = 0;
+			};
+
+			count++;
+		}
+	}
+}
+
+function getDays(month)
+{
+	var days;
+	switch(month)
+	{
+		case 0:
+		//jan
+			days = 31;
+		break;
+		case 1:
+		//feb
+			days = 28;
+		break;
+		case 2:
+		//maart
+			days = 31;
+		break;
+		case 3:
+		//april
+			days = 30;
+		break;
+		case 4:
+		//mei
+			days = 31;
+		break;
+		case 5:
+		//juni
+			days = 30;
+		break;
+		case 6:
+		//juli
+			days = 31;
+		break;
+		case 7:
+		//aug
+			days = 31;
+		break;
+		case 8:
+		//sept
+			days = 30;
+		break;
+		case 9:
+		//okt
+			days = 31;
+		break;
+		case 10:
+		//nov
+			days = 30;
+		break;
+		case 11:
+		//dec
+			days = 31;
+		break;
+	}
+
+	return days;
+}
+
+function Riot()
+{
+	$.ajax(
+	{
+		type: "GET",
+		url: "../js/matchhistory.json",
+
+		success: function(data)
+		{
+			loadData(data)
+		}
+	});
+}
+
+function championData()
+{
+	$.ajax(
+	{
+		type: "GET",
+		url: "../js/champion.json",
+
+		success: function(data)
+		{
+			champData = data;
+			Riot();
+		}
+	});
+}
+
+function summonerData()
+{
+	$.ajax(
+	{
+		type: "GET",
+		url: "../js/summoners.json",
+
+		success: function(data)
+		{
+			summonerData = data;
+		}
+	});
+}
+
+function loadData(data)
+{
+	var i = 0;
+	var winner;
+	$.each(data['matches'].reverse(), function(index, value)
+	{
+		loadChampImages(value['participants']['0']['championId'], champData['data']);
+		loadSummonerImages(value['participants']['0'], summonerData['data']);
+		winner = value['participants']['0']['stats']['winner'];
+	
+		$("#riotBody").append("<tr id='row_" + i + "'></tr>");
+		$("#riotBody > #row_" + i).append("<td>" + (winner == true ? 'Win' : 'Loss') + "</td>");
+		$("#riotBody > #row_" + i).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/5.17.1/img/champion/" + img + "'></td>");
+		$("#riotBody > #row_" + i).append("<td class='items'>");
+
+		for (var r = 0; r < 7; r++) 
+		{
+			if (value['participants']['0']['stats']['item' + r] == 0) 
+			{
+				$("#riotBody > #row_" + i + " .items").append("<img style='width:64px; height:64px'>");
+			} else 
+			{
+				$("#riotBody > #row_" + i + " .items").append("<img src='http://ddragon.leagueoflegends.com/cdn/5.17.1/img/item/" + value['participants']['0']['stats']['item' + r] + ".png'>");
+			}
+		};
+
+		$("#riotBody > #row_" + i).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/5.17.1/img/spell/" + sumImg[1]  + "'><img src='http://ddragon.leagueoflegends.com/cdn/5.17.1/img/spell/" + sumImg[2]  + "'></td>");
+		$("#riotBody > #row_" + i).append("<td>" + getKda(value['participants']['0']['stats']) + "</td>");
+		i++;
+	});
+}
+
+function getKda(value)
+{
+	return (value["kills"] + value["assists"] / value["deaths"]).toFixed(2);
+}
+
+function loadChampImages(id, data)
+{
+	$.each(data, function(index, value)
+	{
+		if (value['key'] == id) 
+		{
+			return img = value['image']['full'];
+		};
+	});
+}
+
+function loadSummonerImages(id, data)
+{
+	var arr = [];
+
+	$.each(data, function(index, value)
+	{
+		if (value['key'] == id['spell1Id']) 
+		{
+			arr['1'] = value['image']['full'];
+		}else if(value['key'] == id['spell2Id'])
+		{
+			arr['2'] = value['image']['full'];
+		};
+
+	});
+	return sumImg = arr;
+}
+

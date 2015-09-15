@@ -41,9 +41,10 @@ class DbHelper
 		return $this->db->query("SELECT * FROM chat INNER JOIN users ON chat.uid = users.uid ORDER BY chat.date ASC", []);
 	}
 
-	public function getPictures()
+	public function getPictures($uid)
 	{
-		return $this->db->query("SELECT * FROM pictures INNER JOIN users ON pictures.uid = users.uid", []);
+		
+		return $this->db->query("SELECT * FROM pictures WHERE uid = ?", [$uid]);
 	}
 
 	public function executeQuery($query, $data)

@@ -1,6 +1,6 @@
 <?php echo $this->doctype(); ?>
 
-<html lang="en">
+<html lang="en" ng-app="contactForm">
 	<head>
 		<meta charset="utf-8">
 		<?php echo $this->headTitle('ZF2'); ?>
@@ -21,6 +21,8 @@
 
 		<!-- Scripts -->
 		<?php echo $this->headScript()
+			->prependFile($this->basePath('js/contact.js'))
+			->prependFile($this->basePath('js/angular.min.js'))
 			->prependFile($this->basePath('js/bootstrap.min.js'))
 			->prependFile($this->basePath('js/script.js'))
 			->prependFile($this->basePath('js/materialize.min.js'))

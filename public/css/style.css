@@ -38,3 +38,11 @@ div.container a.brand {
 .chatBox {
   float:right;
 }
+
+input.ng-invalid.ng-touched {
+  background-color: #FA787E;
+}
+
+input.ng-valid.ng-touched {
+  background-color: #78FA89;
+}

@@ -153,4 +153,14 @@ class IndexController extends AbstractActionController
 		$this->dbhelper->delete($uid);
 		exit;
 	}
+
+	public function gagAction()
+	{
+		return new ViewModel();
+	}
+	
+	public function calAction()
+	{
+		return new ViewModel();
+	}
 }

@@ -33,9 +33,10 @@ class PictureController extends AbstractActionController
 	public function indexAction()
 	{
 		$this->getDbHelper();
+		$sess = new Container('login');
 
 		return new ViewModel(array(
-			'pictures' => $this->dbhelper->getPictures()
+			'pictures' => $this->dbhelper->getPictures($sess->user)
 		));
 	}
 
@@ -62,8 +63,8 @@ class PictureController extends AbstractActionController
 				$filter = new \Zend\Filter\File\RenameUpload("public/img");
 				$filter->setUseUploadName(true);
 				$filter->filter($files['image']);
-
-				$this->dbhelper->executeQuery("INSERT INTO pictures SET uid = 8, title = ?, description = ?, image = ?", [$next['title'], $next['description'], $files['image']['name']]);
+				$sess = new Container('login');
+				$this->dbhelper->executeQuery("INSERT INTO pictures SET uid = ?, title = ?, description = ?, image = ?", [$sess->user, $next['title'], $next['description'], $files['image']['name']]);
 
 				return $this->redirect()->toRoute("home");
 			}

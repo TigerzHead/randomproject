@@ -1,14 +1,14 @@
+<script>var pics = []; </script>
 
 <div class="row">
-<?php foreach ($pictures as $picture) { ?>
-	<div class="col s8 m7 l6">
+
+<?php $i = 1; foreach ($pictures as $picture) { ?>
+
+	<div class="col s8 m7 l6" id="card_<?= $i;?>">
 		<div class="card" style="overflow:visible;">
 			<div class="card-image">
-				<img class="materialboxed s12 m12 l12" src="img/<?= $picture->image?>">
-				<span class="card-title"><?= $picture->title?></span>
 			</div>
 			<div class="card-content">
-				<p><?= $picture->description?></p>
 			</div>
 			<div class="card-action">
 				<a href="#">This is a link</a>
@@ -16,5 +16,24 @@
 			</div>
 		</div>
 	</div>
-<?php }?>
+
+
+	<script>
+		 pics.push({
+				"image": "<?= $picture->image ?>",
+				"title": "<?= $picture->title ?>",
+				"desc":  "<?= $picture->description ?>"
+			}
+		);
+	</script>
+<?php $i++;
+}?>
 </div>
+<ul class="pagination">
+<?php $pages = round(($i / 4), 0, PHP_ROUND_HALF_UP);
+		for ($i=1; $i <= $pages; $i++) { 
+			echo "<a href='#" . $i . "' onclick='paginationBtn(" . $i . ")'><li class='waves-effect pag' id='pag_" . $i . "'>" . $i . "</li></a>";
+		}
+?>
+
+</ul>

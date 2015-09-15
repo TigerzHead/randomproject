@@ -1,0 +1,21 @@
+<div class="row" ng-controller="ContactController">
+	<form class="col s6 offset-s4" name="contactForm" ng-submit="submitForm(contactForm)"novalidate>
+		<div class="row">
+			<div class="input-field col s12">
+				
+				<input type="text" class="col s6" name="firstname" ng-model="form.first" required>
+				<label for="first_name">First Name</label>
+			<?php echo $this->formElementErrors($form->get('firstname'), array('class'=>'card-panel red lighten-2 white-text col s5')); ?>
+			</div>
+				
+			<div class="input-field col s12">
+				<input type="text" class="col s6" name="lastname" ng-model="form.last" required>
+				<label for="last_name">Last Name</label>
+				<?php echo $this->formElementErrors($form->get('lastname'), array('class'=>'card-panel red lighten-2 white-text col s5')); ?>
+			</div>
+		</div>
+		<button class="btn waves-effect waves-light" type="submit" name="action" ng-click="logging(form)">Submit
+			<i class="mdi-content-send right"></i>
+		</button>
+	</form>
+</div>

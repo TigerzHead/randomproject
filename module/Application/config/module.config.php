@@ -139,6 +139,56 @@ return array(
 					),
 				),
 			),
+			'contact' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/contact[/:process]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Contact',
+						'action'		=> 'Index',
+					),
+				),
+			),
+			'9gag' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/gag',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Index',
+						'action'		=> 'gag',
+					),
+				),
+			),
+			'calendar' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/cal',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Index',
+						'action'		=> 'cal',
+					),
+				),
+			),
+			'riot' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/riot',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Riot',
+						'action'		=> 'index',
+					),
+				),
+			),
+			'riotAPI' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/riot/[:api]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Riot',
+						'action'		=> 'API',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(
@@ -165,7 +215,9 @@ return array(
 			'Application\Controller\Index'	=>	'Application\Controller\IndexController',
 			'Application\Controller\Login'	=>	'Application\Controller\LoginController',
 			'Application\Controller\Chat'	=>	'Application\Controller\ChatController',
-			'Application\Controller\Picture'	=>	'Application\Controller\PictureController',
+			'Application\Controller\Picture'	=> 'Application\Controller\PictureController',
+			'Application\Controller\Contact'	=> 'Application\Controller\ContactController',
+			'Application\Controller\Riot'		=> 'Application\Controller\RiotController'
 		),
 	),
 	'view_manager' => array(
