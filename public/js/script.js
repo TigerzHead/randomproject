@@ -377,10 +377,9 @@ function loadMatches (data)
 	var winner;
 	getId('ba');
 	var partId = getParticipantId(data);
-	console.log(partId);
+	
 	$.each(data, function(index, value)
 	{
-		console.log(value);
 		loadChampImages(value['participants'][(partId[i] - 1)]['championId'], champData['data']);
 		loadSummonerImages(value['participants'][(partId[i] - 1)], summonerData['data']);
 		winner = value['participants'][(partId[i] - 1)]['stats']['winner'];
