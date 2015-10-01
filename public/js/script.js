@@ -375,9 +375,9 @@ function loadMatches (data)
 {
 	var i = 0;
 	var winner;
-	getId('ba');
+	getId();
 	var partId = getParticipantId(data);
-	
+
 	$.each(data, function(index, value)
 	{
 		loadChampImages(value['participants'][(partId[i] - 1)]['championId'], champData['data']);
@@ -406,7 +406,7 @@ function loadMatches (data)
 	});
 }
 
-function getId(data) 
+function getId() 
 {
 	$.ajax(
 	{
