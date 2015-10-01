@@ -182,10 +182,30 @@ return array(
 			'riotAPI' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route'		=> '/riot/[:api]',
+					'route'		=> '/riot/[:search][/:username]',
 					'defaults' 	=> array(
 						'controller'	=> 'Application\Controller\Riot',
 						'action'		=> 'API',
+					),
+				),
+			),
+			'riotMatch' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/match/[:id]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Riot',
+						'action'		=> 'MatchHistory',
+					),
+				),
+			),
+			'getId' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/id/[:username]',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Riot',
+						'action'		=> 'getId',
 					),
 				),
 			),
@@ -229,6 +249,7 @@ return array(
 		'template_map' => array(
 			'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
 			'login/layout'            => __DIR__ . '/../view/application/login/layout.phtml',
+			'riot/layout'            => __DIR__ . '/../view/application/riot/layout.phtml',
 			'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
 			'error/404'               => __DIR__ . '/../view/error/404.phtml',
 			'error/index'             => __DIR__ . '/../view/error/index.phtml',

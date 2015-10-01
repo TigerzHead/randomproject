@@ -1,0 +1,67 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en" ng-app="contactForm">
+	<head>
+		<meta charset="utf-8">
+		<?php echo $this->headTitle('ZF2'); ?>
+
+		<?php echo $this->headMeta()
+			->appendName('viewport', 'width=device-width, initial-scale=1.0')
+			->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+		?>
+
+		<!-- Le styles -->
+		<?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+						->prependStylesheet($this->basePath('css/style.css'))
+						->prependStylesheet($this->basePath('css/materialize.min.css'))
+						->prependStylesheet($this->basePath('font/material-design-icons'))
+						->prependStylesheet($this->basePath('font/roboto'))
+						//->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
+						//->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+
+		<!-- Scripts -->
+		<?php echo $this->headScript()
+			->prependFile($this->basePath('js/contact.js'))
+			->prependFile($this->basePath('js/angular.min.js'))
+			->prependFile($this->basePath('js/bootstrap.min.js'))
+			->prependFile($this->basePath('js/script.js'))
+			->prependFile($this->basePath('js/materialize.min.js'))
+			->prependFile($this->basePath('js/jquery.min.js'))
+			->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+			->prependFile($this->basePath('js/html5shiv.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+		; ?>
+
+	</head>
+	<body>
+		<nav class="red lighten-1">
+			<div class="nav-wrapper">
+				<div class="nav-wrapper container"><a id="logo-container" href="<?php echo $this->url('home');?>" class="brand-logo">CRUD</a>
+				<a href="#" data-activates="mobile-nav" class="right button-collapse"><i class="mdi-navigation-more-vert"></i></a>
+				<ul class="right hide-on-med-and-down">
+					<li id="home"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+					<li id="add"><a href="<?php echo $this->url('add') ?>"><?php echo $this->translate('Add') ?></a></li>
+					<li id="chat"><a href="<?php echo $this->url('chat') ?>"><?php echo $this->translate('Chat') ?></a></li>
+					<li id="pictures"><a href="<?php echo $this->url('pictures') ?>"><?php echo $this->translate('Pictures') ?></a></li>
+					<li id="addPictures"><a href="<?php echo $this->url('addPictures') ?>"><?php echo $this->translate('Add pictures') ?></a></li>
+					<li><a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+				</ul>
+				<div class="right">
+					<form id="riotForm">
+						<div class="input-field">
+							<input type="search" id="search-field" class="field" required maxlength="" autocomplete="off">
+							<label for="search-field"><i class="mdi-action-search"></i></label>
+							<i class="mdi-navigation-close close"></i>
+						</div>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<?php echo $this->content; ?>
+			<footer>
+				
+			</footer>
+		</div> <!-- /container -->
+		<?php echo $this->inlineScript() ?>
+	</body>
+</html>
