@@ -209,6 +209,16 @@ return array(
 					),
 				),
 			),
+			'export' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'		=> '/export',
+					'defaults' 	=> array(
+						'controller'	=> 'Application\Controller\Index',
+						'action'		=> 'export',
+					),
+				),
+			),
 		),
 	),
 	'service_manager' => array(
@@ -250,6 +260,7 @@ return array(
 			'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
 			'login/layout'            => __DIR__ . '/../view/application/login/layout.phtml',
 			'riot/layout'            => __DIR__ . '/../view/application/riot/layout.phtml',
+			'index/layout'            => __DIR__ . '/../view/application/index/layout.phtml',
 			'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
 			'error/404'               => __DIR__ . '/../view/error/404.phtml',
 			'error/index'             => __DIR__ . '/../view/error/index.phtml',

@@ -1,0 +1,78 @@
+<?php
+
+$i = 0;
+$csv = [];
+$sortedCsv = [];
+$fullCsv = [];
+
+if (($handle = fopen("C:\Users\Cliff\Desktop\SEO-shop/batterij.csv", "r")) !== FALSE) 
+{
+	while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) 
+	{
+		$num = count($data);
+		array_push($csv, $data);
+	}
+	fclose($handle);
+}
+
+array_push($csv[0], 'Categorie');
+$fullCsv[0] = ['Internal_ID', 'Internal_Variant_ID', 'Visible', 'Brand', 'Supplier', 'NL_Title_Short', 'NL_Title_Long', 'NL_Description_Short', 
+'NL_Description_Long', 'NL_Variant', 'Price', 'Price_Old', 'Price_Cost', 'Price_Unit', 'Unit', 'Tax', 'Stock_Track', 
+'Stock_Disable_Sold_Out', 'Stock_Level', 'Stock_Min', 'Stock_Alert', 'Article_Code', 'EAN', 'SKU', 'Weight','Volume','Colli','Size_X',  'Size_Y',  'Size_Z',  'Matrix',  'Data_01', 'Data_02', 'Data_03', 'Buy_Min', 'Buy_Max', 'NL_Category_1', 'NL_Category_2',   
+	'NL_Category_3',   'NL_Meta_Title',  'NL_Meta_Description', 'NL_Meta_Keywords', 'Images',  'Tags'
+];
+
+foreach ($csv as $key) 
+{
+	if (strpos(strtolower($key[4]), 'batterij') !== false) 
+	{
+		array_push($csv[$i], 'batterijen');
+		$sortedCsv[$i] = $csv[$i];
+		$fullCsv[$i] = [$sortedCsv[$i][0], '', 'Y',  $sortedCsv[$i][3], '', $sortedCsv[$i][4], $sortedCsv[$i][4], '', '', 'default', $sortedCsv[$i][5], '', '0', '0', '', '0.2100', 'n', 'n', '100', '0', '0', $sortedCsv[$i][1], $sortedCsv[$i][2], '', '0', '0', '1', '0', '0', '0', '', '', '', '', '1', '1000', $sortedCsv[$i][11], '', '', '', '', '', $sortedCsv[$i][8], ''];
+	}
+	if (strpos(strtolower($key[4]), 'accu') !== false) 
+	{
+		array_push($csv[$i], "accu's");
+		$sortedCsv[$i] = $csv[$i];
+		$fullCsv[$i] = [$sortedCsv[$i][0], '', 'Y',  $sortedCsv[$i][3], '', $sortedCsv[$i][4], $sortedCsv[$i][4], '', '', 'default', $sortedCsv[$i][5], '', '0', '0', '', '0.2100', 'n', 'n', '100', '0', '0', $sortedCsv[$i][1], $sortedCsv[$i][2], '', '0', '0', '1', '0', '0', '0', '', '', '', '', '1', '1000', $sortedCsv[$i][11], '', '', '', '', '', $sortedCsv[$i][8], ''];
+	}
+	if (strpos(strtolower($key[4]), 'oplaadbare') !== false) 
+	{
+		array_push($csv[$i], 'oplaadbare');
+		$sortedCsv[$i] = $csv[$i];
+		$fullCsv[$i] = [$sortedCsv[$i][0], '', 'Y',  $sortedCsv[$i][3], '', $sortedCsv[$i][4], $sortedCsv[$i][4], '', '', 'default', $sortedCsv[$i][5], '', '0', '0', '', '0.2100', 'n', 'n', '100', '0', '0', $sortedCsv[$i][1], $sortedCsv[$i][2], '', '0', '0', '1', '0', '0', '0', '', '', '', '', '1', '1000', $sortedCsv[$i][11], '', '', '', '', '', $sortedCsv[$i][8], ''];
+	}
+	if (strpos(strtolower($key[4]), 'laders') !== false) 
+	{
+		array_push($csv[$i], 'laders');
+		$sortedCsv[$i] = $csv[$i];
+		$fullCsv[$i] = [$sortedCsv[$i][0], '', 'Y',  $sortedCsv[$i][3], '', $sortedCsv[$i][4], $sortedCsv[$i][4], '', '', 'default', $sortedCsv[$i][5], '', '0', '0', '', '0.2100', 'n', 'n', '100', '0', '0', $sortedCsv[$i][1], $sortedCsv[$i][2], '', '0', '0', '1', '0', '0', '0', '', '', '', '', '1', '1000', $sortedCsv[$i][11], '', '', '', '', '', $sortedCsv[$i][8], ''];
+	}
+
+	$i++;
+}
+
+
+$fileName = 'Billing-Summary.csv';
+ 
+header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+header('Content-Description: File Transfer');
+header("Content-type: text/csv");
+header("Content-Disposition: attachment; filename={$fileName}");
+header("Expires: 0");
+header("Pragma: public");
+
+$fh = @fopen( 'php://output', 'w' );
+
+foreach ( $fullCsv as $data ) 
+{
+	// Put the data into the stream
+	fputcsv($fh, $data, ';');
+}
+
+// Close the file
+fclose($fh);
+// Make sure nothing else is sent, our file is done
+exit;
+
+?>

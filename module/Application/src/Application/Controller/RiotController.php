@@ -44,7 +44,7 @@ class RiotController extends AbstractActionController
 		$this->getDbHelper();
 		$id = $this->checkUsername($username);
 
-		$this->apiCall("v2.2/matchlist/by-summoner/" . $id . "?beginIndex=0&endIndex=5&" . $this->apiKey);
+		$this->apiCall("v2.2/matchlist/by-summoner/" . $id . "?beginIndex=0&endIndex=5&" . $this->apiKey, 1);
 		exit;
 		//$url = "matchhistory/23181685?api_key=57832397-1919-4173-9028-e673a6f1b31d";
 	}
@@ -65,21 +65,21 @@ class RiotController extends AbstractActionController
 		if ($query->count()) 
 		{
 			$data = $this->getId($username);
+			return $data;
 		} else 
 		{
 			$data = $this->apiCall("v1.4/summoner/by-name/" . $username . "?" . $this->apiKey);
-		
-			$data = reset($data)['id'];
 
-			$this->addUsername($username, $data);
+			$data = reset($data);
+
+			$this->addUsername($username, $data->id);
+
+			return $data->id;
 		}
-
-		return $data;
 	}
 
-	public function apiCall($url)
+	public function apiCall($url, $output = 0)
 	{
-
 		$session = curl_init();
 		curl_setopt($session, CURLOPT_URL, "https://euw.api.pvp.net/api/lol/euw/" . $url);
 		curl_setopt($session, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -94,7 +94,12 @@ class RiotController extends AbstractActionController
 
 		$notJson = json_decode($response);
 		curl_close($session);
-		echo $response;
+
+		if ($output == 1) 
+		{
+			echo $response;
+		}
+		
 
 		return $notJson;
 	}
@@ -119,7 +124,7 @@ class RiotController extends AbstractActionController
 		$this->apiKey = "api_key=57832397-1919-4173-9028-e673a6f1b31d";
 		$id = $this->getEvent()->getRouteMatch()->getParam('id');
 
-		$this->apiCall("v2.2/match/" . $id . "?" . $this->apiKey);
+		$this->apiCall("v2.2/match/" . $id . "?" . $this->apiKey, 1);
 		exit;
 	}
 

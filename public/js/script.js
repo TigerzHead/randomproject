@@ -60,7 +60,7 @@ $(document).ready(function()
 		if (val !== '') 
 		{
 			username = val;
-			summonerData();
+			summonerDatas();
 			championData();
 		};
 	})
@@ -82,6 +82,7 @@ $(document).ready(function()
 	
 	calendar();
 })
+
 
 function submitPost(post)
 {
@@ -294,7 +295,7 @@ function championData()
 	});
 }
 
-function summonerData()
+function summonerDatas()
 {
 	$.ajax(
 	{
@@ -377,13 +378,13 @@ function loadMatches (data)
 	var winner;
 	getId();
 	var partId = getParticipantId(data);
-
+	$("#riotBody").empty();
 	$.each(data, function(index, value)
 	{
 		loadChampImages(value['participants'][(partId[i] - 1)]['championId'], champData['data']);
 		loadSummonerImages(value['participants'][(partId[i] - 1)], summonerData['data']);
 		winner = value['participants'][(partId[i] - 1)]['stats']['winner'];
-	
+
 		$("#riotBody").append("<tr id='row_" + i + "'></tr>");
 		$("#riotBody > #row_" + i).append("<td>" + (winner == true ? 'Win' : 'Loss') + "</td>");
 		$("#riotBody > #row_" + i).append("<td><img src='http://ddragon.leagueoflegends.com/cdn/5.17.1/img/champion/" + img + "'></td>");

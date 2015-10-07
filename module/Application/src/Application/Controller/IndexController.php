@@ -44,6 +44,15 @@ class IndexController extends AbstractActionController
 		]);
 	}
 
+	public function exportAction()
+	{
+
+		$layout = $this->layout();
+		$layout->setTemplate('index/layout');
+
+		return new ViewModel();
+	}
+
 	public function addAction()
 	{
 		if (!$this->getEvent()->getRouteMatch()->getParam('process')) 
